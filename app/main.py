@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import time
 import streamlit as st
 from app.api_client import predict_price
@@ -28,6 +32,10 @@ duration = st.number_input(
 days_left = st.slider("Jours avant le départ", 1, 365, 30)
 
 if st.button("Estimer le prix", type="primary"):
+    if source_city == destination_city:
+        st.warning("La ville de départ et la ville d'arrivée doivent être différentes.")
+        st.stop()
+
     inputs = {
         "airline": airline,
         "source_city": source_city,

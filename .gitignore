@@ -1,0 +1,16 @@
+# Environnement virtuel
+.venv/
+
+# Variables d'environnement
+.env
+
+# Logs applicatifs
+monitoring/logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,28 @@
+name: CI — smart-flight-app
+
+on:
+  push:
+    branches: [main, Dev3]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Lancer les tests avec couverture
+        run: pytest tests/ --cov=app --cov-report=term
+        env:
+          API_URL: http://localhost:8000
+          API_KEY: test-key
+          LOG_DIR: /tmp/logs
